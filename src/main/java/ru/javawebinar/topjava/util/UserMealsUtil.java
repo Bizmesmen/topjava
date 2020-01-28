@@ -64,5 +64,4 @@ public class UserMealsUtil {
                         dateCalories.get(meal.getDateTime().toLocalDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
     }
-
 }
