@@ -53,8 +53,8 @@ public class MealServlet extends HttpServlet {
             case "delete": {
                 int mealId = Integer.parseInt(request.getParameter("mealId"));
                 dao.delete(mealId);
-                request.setAttribute("meal", dao.getAll());
                 forward = listOfMealView;
+                request.setAttribute("meals", listToDisplay);
                 break;
             }
             case "edit": {
@@ -80,7 +80,7 @@ public class MealServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         log.debug("MealServlet doPost");
 
-        LocalDateTime localDateTime = LocalDateTime.parse(request.getParameter("dateTime"), TimeUtil.FORMATTER);
+        LocalDateTime localDateTime = LocalDateTime.parse(request.getParameter("date"), TimeUtil.FORMATTER);
         String description = request.getParameter("description");
         int calories = Integer.parseInt(request.getParameter("calories"));
         String mealId = request.getParameter("mealId");
@@ -94,6 +94,5 @@ public class MealServlet extends HttpServlet {
             dao.update(meal);
         }
         response.sendRedirect("meals");
-
     }
 }

@@ -34,6 +34,3 @@
 <p align="center"><a href="meals?action=insert">Add Meal</a></p>
 </body>
 </html>
-
-<c:set var="formatter" value="${formatter}" />
-<td>${meal.dateTime.format(formatter)}</td>

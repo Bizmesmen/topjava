@@ -16,7 +16,7 @@ public class MealDao implements Dao{
     public void add(Meal meal) {
         Integer id = counter.getAndIncrement();
         meal.setId(id);
-        idMeal.put(id, new Meal(meal.getDateTime(), meal.getDescription(), meal.getCalories()));
+        idMeal.put(id, meal);
     }
 
     @Override
