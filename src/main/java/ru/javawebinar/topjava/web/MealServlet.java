@@ -54,7 +54,8 @@ public class MealServlet extends HttpServlet {
                 int mealId = Integer.parseInt(request.getParameter("mealId"));
                 dao.delete(mealId);
                 request.setAttribute("meal", dao.getAll());
-                return;
+                forward = listOfMealView;
+                break;
             }
             case "edit": {
                 forward = insertOrEdit;

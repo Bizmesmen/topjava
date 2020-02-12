@@ -25,8 +25,8 @@
             <td>${meal.dateTime.format(formatter)}</td>
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
-            <td><a href="meals?action=edit&mealId=${meal.id}">Изменить</a></td>
-            <td><a href="meals?action=delete&mealId=${meal.id}">Удалить</a></td>
+            <td><a href="meals?action=edit&mealId=${meal.id}">Update</a></td>
+            <td><a href="meals?action=delete&mealId=${meal.id}">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>
