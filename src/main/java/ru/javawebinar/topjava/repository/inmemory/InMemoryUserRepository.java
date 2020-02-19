@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
+import ru.javawebinar.topjava.util.MealsUtil;
+import ru.javawebinar.topjava.util.UsersUtil;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,6 +22,10 @@ public class InMemoryUserRepository implements UserRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryUserRepository.class);
     private Map<Integer, User> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
+
+    {
+        UsersUtil.USERS.forEach(this::save);
+    }
 
     @Override
     public boolean delete(int id) {
