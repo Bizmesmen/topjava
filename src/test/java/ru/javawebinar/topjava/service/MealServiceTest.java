@@ -31,52 +31,52 @@ public class MealServiceTest {
 
     @Test
     public void get() {
-        Meal meal = service.get(100002, USER_ID);
-        assertMatch(meal, MEAL1);
+        Meal meal = service.get(USER_MEAL1.getId(), USER_ID);
+        assertMatch(meal, USER_MEAL1);
     }
 
     @Test(expected = NotFoundException.class)
     public void notFoundGet() {
-        service.get(100002, ADMIN_ID);
+        service.get(USER_MEAL1.getId(), ADMIN_ID);
     }
 
     @Test
     public void delete() {
-        service.delete(100004, USER_ID);
+        service.delete(USER_MEAL3.getId(), USER_ID);
         List<Meal> all = service.getAll(USER_ID);
-        assertMatch(all, MEAL2, MEAL1);
+        assertMatch(all, USER_MEAL2, USER_MEAL1);
     }
 
     @Test(expected = NotFoundException.class)
     public void notFoundDelete() {
-        service.delete(100004, ADMIN_ID);
+        service.delete(USER_MEAL3.getId(), ADMIN_ID);
     }
 
     @Test
     public void getBetweenHalfOpen() {
         List<Meal> all = service.getBetweenHalfOpen(LocalDate.of(2020, Month.JANUARY, 30),
                                                     LocalDate.of(2020, Month.MARCH, 30), ADMIN_ID);
-        assertMatch(all, MEAL7, MEAL6);
+        assertMatch(all, ADMIN_MEAL4, ADMIN_MEAL3);
     }
 
     @Test
     public void getAll() {
         List<Meal> all = service.getAll(USER_ID);
-        assertMatch(all, MEAL3, MEAL2, MEAL1);
+        assertMatch(all, USER_MEAL3, USER_MEAL2, USER_MEAL1);
     }
 
     @Test
     public void update() {
         Meal updatedMeal = getUpdated();
         service.update(updatedMeal, ADMIN_ID);
-        assertMatch(service.getAll(ADMIN_ID), MEAL7, MEAL6, MEAL5, updatedMeal);
+        assertMatch(service.getAll(ADMIN_ID), ADMIN_MEAL4, ADMIN_MEAL3, ADMIN_MEAL2, updatedMeal);
     }
 
     @Test(expected = NotFoundException.class)
     public void notFoundUpdate() {
         Meal updatedMeal = getUpdated();
         service.update(updatedMeal, USER_ID);
-        assertMatch(service.getAll(ADMIN_ID), MEAL7, MEAL6, MEAL5, updatedMeal);
+        assertMatch(service.getAll(ADMIN_ID), ADMIN_MEAL4, ADMIN_MEAL3, ADMIN_MEAL2, updatedMeal);
     }
 
     @Test
@@ -84,6 +84,7 @@ public class MealServiceTest {
         Meal newMeal = getNew();
         Meal created = service.create(newMeal, USER_ID);
         newMeal.setId(created.getId());
-        assertMatch(service.getAll(USER_ID), newMeal, MEAL3, MEAL2, MEAL1);
+        assertMatch(service.getAll(USER_ID), newMeal, USER_MEAL3, USER_MEAL2, USER_MEAL1);
+        assertMatch(service.create(newMeal, USER_ID), newMeal);
     }
 }
