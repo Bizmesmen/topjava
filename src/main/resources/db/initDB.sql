@@ -32,5 +32,6 @@ CREATE TABLE user_meals
     date_time     TIMESTAMP   NOT NULL,
     description   VARCHAR     NOT NULL,
     calories      INTEGER     NOT NULL,
+    CONSTRAINT user_id_date_time_uniq UNIQUE (user_id, date_time),
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 )
