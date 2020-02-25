@@ -19,7 +19,7 @@ public class MealTestData {
     public static final Meal MEAL7 = new Meal(100008, LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 500);
 
     public static Meal getNew() {
-        return new Meal(null, LocalDateTime.now(), "newDescription", 100);
+        return new Meal(null, LocalDateTime.of(2020, Month.FEBRUARY, 25, 0, 0), "newDescription", 100);
     }
 
     public static Meal getUpdated() {
@@ -35,6 +35,10 @@ public class MealTestData {
     }
 
     public static void assertMatch(Iterable<Meal> actual, Meal... expected) {
-        assertThat(actual).usingRecursiveFieldByFieldElementComparator().containsExactlyElementsOf(Arrays.asList(expected));
+        assertMatch(actual, Arrays.asList(expected));
+    }
+
+    public static void assertMatch(Iterable<Meal> actual, Iterable<Meal>  expected) {
+        assertThat(actual).usingRecursiveFieldByFieldElementComparator().containsExactlyElementsOf(expected);
     }
 }
