@@ -48,15 +48,16 @@ public class MealServiceTest {
         @Override
         protected void finished(long ns, Description description) {
             String str = description.getMethodName() + " - " + TimeUnit.NANOSECONDS.toMillis(ns) + " ms";
-            log.info(TimeUnit.NANOSECONDS.toMillis(ns) + " ms");
+            log.info("\u001B[32m" + str + "\u001B[0m");
             nameTimeTest.add(str);
         }
     };
 
     @AfterClass
     public static void log() {
-        log.info("_______________ TEST LIST _______________");
-        nameTimeTest.forEach(log::info);
+        log.info("\n_______________ \u001B[31mTEST LIST\u001B[0m _______________\n" +
+                "\u001B[33m" + String.join("\n", nameTimeTest) + "\u001B[0m" +
+                "\n_______________ \u001B[31mTEST LIST\u001B[0m _______________\n");
     }
 
     @Autowired
