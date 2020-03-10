@@ -13,7 +13,7 @@ import java.util.List;
 
 import static ru.javawebinar.topjava.UserTestData.*;
 
-abstract public class AbstractUserServiceTest extends AbstractBaseServiceTest {
+public abstract class AbstractUserServiceTest extends AbstractBaseServiceTest {
 
 
     @Autowired
