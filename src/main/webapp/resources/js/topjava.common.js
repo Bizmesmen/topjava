@@ -27,7 +27,11 @@ function deleteRow(id) {
         url: context.ajaxUrl + id,
         type: "DELETE"
     }).done(function () {
-        updateTable();
+        if (context.ajaxUrl === "ajax/profile/meals/") {
+            context.updateTable();
+        } else {
+            updateTable();
+        }
         successNoty("Deleted");
     });
 }
@@ -38,6 +42,10 @@ function updateTable() {
     });
 }
 
+function updateTableByData(data) {
+    context.datatableApi.clear().rows.add(data).draw();
+}
+
 function save() {
     $.ajax({
         type: "POST",
@@ -45,7 +53,11 @@ function save() {
         data: form.serialize()
     }).done(function () {
         $("#editRow").modal("hide");
-        updateTable();
+        if (context.ajaxUrl === "ajax/profile/meals/") {
+            context.updateTable();
+        } else {
+            updateTable();
+        }
         successNoty("Saved");
     });
 }
